@@ -1,0 +1,30 @@
+﻿<Window x:Class="ProjectNet.View.Etudianta"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cal="http://www.caliburnproject.org"
+        xmlns:local="clr-namespace:ProjectNet.View" xmlns:local1="clr-namespace:ProjectNet.VueModele"
+        mc:Ignorable="d"
+        Title="Etudianta" Height="450" Width="800">
+
+    <Grid Background="#FF8DE9D5">
+        <GroupBox Header="Etudiants" Margin="212,190,212,45" Foreground="#FFCF2222" Background="#FF27AAB4"/>
+        <Label Content="{Binding Cinlabel}" HorizontalAlignment="Left" Margin="275,245,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="342,249,0,0" TextWrapping="Wrap" Text="{Binding Cin}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="{Binding Prenomlabel}" HorizontalAlignment="Left" Margin="275,307,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="342,281,0,0" TextWrapping="Wrap" Text="{Binding Nom}" VerticalAlignment="Top" Width="120"/>
+        <Label Content="{Binding Nomlabel}" HorizontalAlignment="Left" Margin="275,277,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="342,311,0,0" TextWrapping="Wrap" Text="{Binding Prenom}" VerticalAlignment="Top" Width="120"/>
+        <ComboBox Name="CBBOX" ItemsSource="{Binding Tdep}" DisplayMemberPath="NameDep" 
+                  SelectionChanged="cb_SelectionChanged"
+                  SelectedItem="{Binding DepS}" HorizontalAlignment="Left" Margin="362,96,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="{Binding Deplabel}" HorizontalAlignment="Left" Margin="275,94,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Cllabel}" HorizontalAlignment="Left" Margin="275,140,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="CLBOX" ItemsSource="{Binding Tcl}" DisplayMemberPath="NameCl" SelectedItem="{Binding ClS,Mode=TwoWay}" 
+                  HorizontalAlignment="Left" Margin="362,142,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="{Binding Boutonajout}" Command="{Binding AjouterCommande}" HorizontalAlignment="Left" Margin="495,345,0,0" VerticalAlignment="Top"/>
+        <Button Content="{Binding BoutonAffiche}" Command="{Binding AfficherCommande}" HorizontalAlignment="Left" Margin="256,345,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

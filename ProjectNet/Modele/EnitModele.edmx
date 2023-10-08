@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EnitModele.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EnitModeleStoreContainer">
+    <EntitySet Name="Departements" EntityType="EnitModele.Store.Departements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Classes" EntityType="EnitModele.Store.Classes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Etudiants" EntityType="EnitModele.Store.Etudiants" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="DepartementClasse" Association="EnitModele.Store.DepartementClasse">
+      <End Role="Departement" EntitySet="Departements" />
+      <End Role="Classe" EntitySet="Classes" />
+    </AssociationSet>
+    <AssociationSet Name="ClasseEtudiant" Association="EnitModele.Store.ClasseEtudiant">
+      <End Role="Classe" EntitySet="Classes" />
+      <End Role="Etudiant" EntitySet="Etudiants" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Departements">
+    <Key>
+      <PropertyRef Name="IdDep" />
+    </Key>
+    <Property Name="IdDep" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NameDep" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="IdCl" />
+    </Key>
+    <Property Name="IdCl" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NameCl" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DepartementIdDep" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Etudiants">
+    <Key>
+      <PropertyRef Name="IdEt" />
+    </Key>
+    <Property Name="IdEt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CIN" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prénom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClasseIdCl" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="DepartementClasse">
+    <End Role="Departement" Type="EnitModele.Store.Departements" Multiplicity="1" />
+    <End Role="Classe" Type="EnitModele.Store.Classes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departement">
+        <PropertyRef Name="IdDep" />
+      </Principal>
+      <Dependent Role="Classe">
+        <PropertyRef Name="DepartementIdDep" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClasseEtudiant">
+    <End Role="Classe" Type="EnitModele.Store.Classes" Multiplicity="1" />
+    <End Role="Etudiant" Type="EnitModele.Store.Etudiants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classe">
+        <PropertyRef Name="IdCl" />
+      </Principal>
+      <Dependent Role="Etudiant">
+        <PropertyRef Name="ClasseIdCl" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="EnitModele" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="EnitContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departements" EntityType="EnitModele.Departement" />
+          <EntitySet Name="Classes" EntityType="EnitModele.Classe" />
+          <AssociationSet Name="DepartementClasse" Association="EnitModele.DepartementClasse">
+            <End Role="Departement" EntitySet="Departements" />
+            <End Role="Classe" EntitySet="Classes" />
+          </AssociationSet>
+          <EntitySet Name="Etudiants" EntityType="EnitModele.Etudiant" />
+          <AssociationSet Name="ClasseEtudiant" Association="EnitModele.ClasseEtudiant">
+            <End Role="Classe" EntitySet="Classes" />
+            <End Role="Etudiant" EntitySet="Etudiants" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Departement">
+          <Key>
+            <PropertyRef Name="IdDep" />
+          </Key>
+          <Property Name="IdDep" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="NameDep" Type="String" Nullable="false" />
+          <NavigationProperty Name="Classes" Relationship="EnitModele.DepartementClasse" FromRole="Departement" ToRole="Classe" />
+        </EntityType>
+        <EntityType Name="Classe">
+          <Key>
+            <PropertyRef Name="IdCl" />
+          </Key>
+          <Property Name="IdCl" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="NameCl" Type="String" Nullable="false" />
+          <NavigationProperty Name="Departement" Relationship="EnitModele.DepartementClasse" FromRole="Classe" ToRole="Departement" />
+          <Property Name="DepartementIdDep" Type="String" Nullable="false" />
+          <NavigationProperty Name="Etudiants" Relationship="EnitModele.ClasseEtudiant" FromRole="Classe" ToRole="Etudiant" />
+        </EntityType>
+        <Association Name="DepartementClasse">
+          <End Type="EnitModele.Departement" Role="Departement" Multiplicity="1" />
+          <End Type="EnitModele.Classe" Role="Classe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departement">
+              <PropertyRef Name="IdDep" />
+            </Principal>
+            <Dependent Role="Classe">
+              <PropertyRef Name="DepartementIdDep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Etudiant">
+          <Key>
+            <PropertyRef Name="IdEt" />
+          </Key>
+          <Property Name="IdEt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CIN" Type="String" Nullable="false" />
+          <Property Name="Nom" Type="String" Nullable="false" />
+          <Property Name="Prénom" Type="String" Nullable="false" />
+          <NavigationProperty Name="Classe" Relationship="EnitModele.ClasseEtudiant" FromRole="Etudiant" ToRole="Classe" />
+          <Property Name="ClasseIdCl" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="ClasseEtudiant">
+          <End Type="EnitModele.Classe" Role="Classe" Multiplicity="1" />
+          <End Type="EnitModele.Etudiant" Role="Etudiant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classe">
+              <PropertyRef Name="IdCl" />
+            </Principal>
+            <Dependent Role="Etudiant">
+              <PropertyRef Name="ClasseIdCl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EnitModeleStoreContainer" CdmEntityContainer="EnitContext">
+    <EntitySetMapping Name="Departements">
+      <EntityTypeMapping TypeName="IsTypeOf(EnitModele.Departement)">
+        <MappingFragment StoreEntitySet="Departements">
+          <ScalarProperty Name="IdDep" ColumnName="IdDep" />
+          <ScalarProperty Name="NameDep" ColumnName="NameDep" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Classes">
+      <EntityTypeMapping TypeName="IsTypeOf(EnitModele.Classe)">
+        <MappingFragment StoreEntitySet="Classes">
+          <ScalarProperty Name="IdCl" ColumnName="IdCl" />
+          <ScalarProperty Name="NameCl" ColumnName="NameCl" />
+          <ScalarProperty Name="DepartementIdDep" ColumnName="DepartementIdDep" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Etudiants">
+      <EntityTypeMapping TypeName="IsTypeOf(EnitModele.Etudiant)">
+        <MappingFragment StoreEntitySet="Etudiants">
+          <ScalarProperty Name="IdEt" ColumnName="IdEt" />
+          <ScalarProperty Name="CIN" ColumnName="CIN" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prénom" ColumnName="Prénom" />
+          <ScalarProperty Name="ClasseIdCl" ColumnName="ClasseIdCl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

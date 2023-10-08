@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EnitModeleStoreContainer" CdmEntityContainer="EnitContext">
+    <EntitySetMapping Name="Departements">
+      <EntityTypeMapping TypeName="IsTypeOf(EnitModele.Departement)">
+        <MappingFragment StoreEntitySet="Departements">
+          <ScalarProperty Name="IdDep" ColumnName="IdDep" />
+          <ScalarProperty Name="NameDep" ColumnName="NameDep" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Classes">
+      <EntityTypeMapping TypeName="IsTypeOf(EnitModele.Classe)">
+        <MappingFragment StoreEntitySet="Classes">
+          <ScalarProperty Name="IdCl" ColumnName="IdCl" />
+          <ScalarProperty Name="NameCl" ColumnName="NameCl" />
+          <ScalarProperty Name="DepartementIdDep" ColumnName="DepartementIdDep" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Etudiants">
+      <EntityTypeMapping TypeName="IsTypeOf(EnitModele.Etudiant)">
+        <MappingFragment StoreEntitySet="Etudiants">
+          <ScalarProperty Name="IdEt" ColumnName="IdEt" />
+          <ScalarProperty Name="CIN" ColumnName="CIN" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Prénom" ColumnName="Prénom" />
+          <ScalarProperty Name="ClasseIdCl" ColumnName="ClasseIdCl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

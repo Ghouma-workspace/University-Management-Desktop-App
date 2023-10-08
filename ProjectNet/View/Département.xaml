@@ -1,0 +1,19 @@
+﻿<Window x:Class="ProjectNet.View.Département"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectNet.View"
+        mc:Ignorable="d"
+        Title="Département" Width="593" Height="385">
+
+    <Grid Margin="0,0,73,97" Background="#FF8DE9D5">
+        <GroupBox HorizontalAlignment="Left" Height="149" Header="Département" Margin="44,49,0,0" VerticalAlignment="Top" Width="427" Foreground="#FFCF2222" Background="#FF27AAB4"/>
+        <Label Content="{Binding Idlabel}" HorizontalAlignment="Left" Margin="96,99,0,0" VerticalAlignment="Top"/>
+        <Label Content="{Binding Nomlabel}" HorizontalAlignment="Left" Margin="96,134,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="153,103,0,0" TextWrapping="Wrap" Text="{Binding Iddep}" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="153,138,0,0" TextWrapping="Wrap" Text="{Binding Nomdep}" VerticalAlignment="Top" Width="120"/>
+        <Button Content="{Binding Ajoutbouton}" Command="{Binding AjouterCommande}" HorizontalAlignment="Left" Margin="258,170,0,0" VerticalAlignment="Top"/>
+        <Button Content="{Binding Affichebouton}" Command="{Binding AfficherCommande}" HorizontalAlignment="Left" Margin="213,211,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

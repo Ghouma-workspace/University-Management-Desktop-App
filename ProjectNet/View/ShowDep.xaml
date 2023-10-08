@@ -1,0 +1,16 @@
+﻿<Window x:Class="ProjectNet.View.ShowDep"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectNet.View" xmlns:local1="clr-namespace:ProjectNet.VueModele"
+        mc:Ignorable="d"
+        Title="ShowDep" Height="450" Width="800">
+
+    <Window.DataContext>
+        <local1:DepartementVueModele/>
+    </Window.DataContext>
+    <Grid>
+        <DataGrid x:Name="DG" ItemsSource="{Binding DepList}"/>
+    </Grid>
+</Window>

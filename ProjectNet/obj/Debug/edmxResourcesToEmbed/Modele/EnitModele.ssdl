@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EnitModele.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EnitModeleStoreContainer">
+    <EntitySet Name="Departements" EntityType="EnitModele.Store.Departements" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Classes" EntityType="EnitModele.Store.Classes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Etudiants" EntityType="EnitModele.Store.Etudiants" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="DepartementClasse" Association="EnitModele.Store.DepartementClasse">
+      <End Role="Departement" EntitySet="Departements" />
+      <End Role="Classe" EntitySet="Classes" />
+    </AssociationSet>
+    <AssociationSet Name="ClasseEtudiant" Association="EnitModele.Store.ClasseEtudiant">
+      <End Role="Classe" EntitySet="Classes" />
+      <End Role="Etudiant" EntitySet="Etudiants" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Departements">
+    <Key>
+      <PropertyRef Name="IdDep" />
+    </Key>
+    <Property Name="IdDep" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NameDep" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="IdCl" />
+    </Key>
+    <Property Name="IdCl" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NameCl" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DepartementIdDep" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Etudiants">
+    <Key>
+      <PropertyRef Name="IdEt" />
+    </Key>
+    <Property Name="IdEt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CIN" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prénom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClasseIdCl" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="DepartementClasse">
+    <End Role="Departement" Type="EnitModele.Store.Departements" Multiplicity="1" />
+    <End Role="Classe" Type="EnitModele.Store.Classes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departement">
+        <PropertyRef Name="IdDep" />
+      </Principal>
+      <Dependent Role="Classe">
+        <PropertyRef Name="DepartementIdDep" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClasseEtudiant">
+    <End Role="Classe" Type="EnitModele.Store.Classes" Multiplicity="1" />
+    <End Role="Etudiant" Type="EnitModele.Store.Etudiants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classe">
+        <PropertyRef Name="IdCl" />
+      </Principal>
+      <Dependent Role="Etudiant">
+        <PropertyRef Name="ClasseIdCl" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
